@@ -5,7 +5,7 @@ import {SearchManufacturer} from "./";
 import Image from 'next/image';
 
 import { useRouter } from "next/navigation";
-import { Router } from 'next/router';
+
 
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
@@ -55,9 +55,10 @@ const SearchBar = () => {
       }
   
 
-      const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+      const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
   
-      router.push(newPathname);
+      router.push(newPathName, { scroll: false });
+
     };
 
   return (

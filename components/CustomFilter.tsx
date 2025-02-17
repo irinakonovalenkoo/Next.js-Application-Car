@@ -3,7 +3,7 @@
 import { Fragment, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Listbox, Transition, ListboxButton,ListboxOption,ListboxOptions } from "@headlessui/react";
+import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
 
@@ -16,7 +16,7 @@ const CustomFilter = ( {title, options}: CustomFilterProps) => {
   const handleUpdateParams = (e: { title: string; value: string }) => {
     const newPathName = updateSearchParams(title, e.value.toLowerCase());
 
-    router.push(newPathName);
+    router.push(newPathName, { scroll: false });
   };
 
   return (
@@ -30,13 +30,13 @@ const CustomFilter = ( {title, options}: CustomFilterProps) => {
       >
         <div className='relative w-fit z-10'>
           
-          <ListboxButton className='custom-filter__btn'>
+          <Listbox.Button className='custom-filter__btn'>
             <span className='block truncate'>{selected.title}</span>
             <Image src='/chevron-up-down.svg' 
             width={20} 
             height={20} 
             className='ml-4 object-contain' alt='chevron_up-down' />
-          </ListboxButton>
+          </Listbox.Button>
          
           <Transition
             as={Fragment} 
@@ -44,9 +44,9 @@ const CustomFilter = ( {title, options}: CustomFilterProps) => {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <ListboxOptions className='custom-filter__options'>
+            <Listbox.Options className='custom-filter__options'>
               {options.map((option) => (
-                <ListboxOption
+                <Listbox.Option
                   key={option.title}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 px-4 ${
@@ -62,9 +62,9 @@ const CustomFilter = ( {title, options}: CustomFilterProps) => {
                       </span>
                     </>
                   )}
-                </ListboxOption>
+                </Listbox.Option>
               ))}
-            </ListboxOptions>
+            </Listbox.Options>
           </Transition>
         </div>
       </Listbox>

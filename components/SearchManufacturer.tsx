@@ -2,15 +2,7 @@
 
 import { useState, Fragment } from "react";
 import Image from "next/image";
-import {
-  Combobox,
-  Transition,
-  ComboboxButton,
-  ComboboxInput,
-  ComboboxOptions,
-  ComboboxOption,
-} from "@headlessui/react";
-
+import { Combobox, Transition } from "@headlessui/react";
 import { manufacturers } from "@/constants";
 import { SearchManufacturerProps } from "@/types";
 
@@ -34,7 +26,7 @@ const SearchManufacturer = ({
     <div className="search-manufacturer">
       <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
-          <ComboboxButton className="absolute top-[14px] left-2">
+          <Combobox.Button className="absolute top-[14px] left-2">
             <Image
               src="/car-logo.svg"
               width={20}
@@ -42,8 +34,8 @@ const SearchManufacturer = ({
               className="ml-4"
               alt="Car Logo"
             />
-          </ComboboxButton>
-          <ComboboxInput
+          </Combobox.Button>
+          <Combobox.Input
             className="search-manufacturer__input"
             placeholder="Volkswagen"
             displayValue={(manufacturer: string) => manufacturer}
@@ -57,9 +49,9 @@ const SearchManufacturer = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <ComboboxOptions>
+            <Combobox.Options>
               {filteredManufacturers.map((item) => (
-                  <ComboboxOption
+                  <Combobox.Option
                     key={item}
                     className={({ active }) =>
                       `relative search-manufacturer__option ${
@@ -88,10 +80,10 @@ const SearchManufacturer = ({
 
 
                     )}
-                  </ComboboxOption>
+                  </Combobox.Option>
                 ))
               }
-            </ComboboxOptions>
+            </Combobox.Options>
           </Transition>
         </div>
       </Combobox>
